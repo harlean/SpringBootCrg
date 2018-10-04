@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("ftl")
+@RequestMapping("/ftl")
 public class FreemarkerController {
 
 	@Autowired
