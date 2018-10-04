@@ -6,7 +6,7 @@ import com.crg.firstdemocrg.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.reactive.function.server.*;
+
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -36,18 +36,18 @@ public class RouterFunctionConfigration {
      *    Flux 或者 Mono 都是Publisher
      */
 
-    @Bean
-    @Autowired
-    public RouterFunction<ServerResponse> personFindAll(UserRepo userRepo){
-
-        //返回所有的用户对象
-        String pattern = "/person/find/all";
-
-        return RouterFunctions.route(RequestPredicates.GET(pattern),
-                       request -> {
-                                   Collection<User>  users = userRepo.findAll();
-                                   Flux<User> userFlux = Flux.fromIterable(users);
-                                   return ServerResponse.ok().body(userFlux,User.class);
-                               });
-    }
+//    @Bean
+//    @Autowired
+//    public RouterFunction<ServerResponse> personFindAll(UserRepo userRepo){
+//
+//        //返回所有的用户对象
+//        String pattern = "/person/find/all";
+//
+//        return RouterFunctions.route(RequestPredicates.GET(pattern),
+//                       request -> {
+//                                   Collection<User>  users = userRepo.findAll();
+//                                   Flux<User> userFlux = Flux.fromIterable(users);
+//                                   return ServerResponse.ok().body(userFlux,User.class);
+//                               });
+//    }
 }

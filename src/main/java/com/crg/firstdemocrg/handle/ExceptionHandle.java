@@ -20,7 +20,7 @@ public class ExceptionHandle {
         if (e instanceof GirlException){
             return ResultUntil.error(((GirlException) e).getCode(),e.getMessage());
         }else {
-            logger.info("系统异常");
+            logger.info(e.toString());
             return ResultUntil.error(-1,"未知错误");
         }
 

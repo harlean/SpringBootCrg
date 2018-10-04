@@ -4,31 +4,100 @@ spring:
    datasource:
      driver-class-name: oracle.jdbc.driver.OracleDriver
      url: jdbc:oracle:thin:@localhost:1521:orcl
-     username: system
+     username: C## CRG IDENTIFIED BY PASSWORD
      password: Congriguang5918
    jpa:
      hibernate:
        ddl-auto: update
      show-sql: true
-  ##关闭缓存，及时刷新
-   thymeleaf:
-      cache: true
+  #关闭缓存，及时刷新
    #热部署生效
    devtools:
      restart:
        enabled: true
        additiaonal-paths: src/main/java
+# \u4e3amybatis\u8bbe\u7f6e\uff0c\u751f\u4ea7\u73af\u5883\u53ef\u5220\u9664
    #设置重新目录
-
    freemarker:
-      template-loader-path: src/main/resources/templates
-      cache: false
-      charset: UTF-8
-      check-template-location: true
+         cache: false
+         charset: UTF-8
+         content-type: text/html
+         suffix: .ftl
+         check-template-location: true
+         template-loader-path: classpath:/templates
+         expose-request-attributes: true
+         expose-session-attributes: true
+         expose-spring-macro-helpers: true
+         request-context-attribute: request
+         settings:
+          default_encoding: UTF-8
+          output_encoding: UTF-8
+          url_escaping_charset: UTF-8
+          tag_syntax: auto_detect
+          locale: zh_CN
+          datetime_format: yyyy-MM-dd HH:mm:ss
+          date_format: yyyy-MM-dd
+          time_format: HH:mm:ss
+          # thymeleaf \u9759\u6001\u8d44\u6e90\u914d\u7f6e
+   thymeleaf:
+      prefix: classpath:/templates
+      suffix: .html
+      mode=: HTML5
+      encoding: UTF-8
       content-type: text/html
-      expose-request-attributes: true
-      expose-session-attributes: true
-      request-context-attributes: request
-      suffix: .ftl
+      cache: false
+
+   mvc:
+     static-path-pattern: /static/**
+
+     # Redis\u6570\u636e\u5e93\u7d22\u5f15\uff08\u9ed8\u8ba4\u4e3a0\uff09
+   redis:
+     database: 0
+     host: 127.0.0.1
+     port: 6379
+     password:
+     pool:
+     max-active: 1000
+     max-wait: -1
+     max-idle: 10
+     min-idle: 2
+     timeout: 50000
+
+
+restart:
+    include:
+       mapper: /mapper-[\\w-\\.]+jar
+       pagehelper: /pagehelper-[\\w-\\.]+jar
+
+
+
+     ############################################################
+     #
+     # mybatis \u914d\u7f6e
+     #
+     ############################################################
+     # mybatis \u914d\u7f6e
+mybatis:
+    type-aliases-package: com.crg.firstdemocrg.domin
+    mapper-locations: classpath:mapper/*.xml
+     # \u901a\u7528 Mapper \u914d\u7f6e
+mapper:
+    mappers:
+        com:
+          crg:
+             firstdemocrg:
+                util:
+                   MyMapper
+    not-empty: false
+    identity: Oracle
+     # \u5206\u9875\u63d2\u4ef6\u914d\u7f6e
+pagehelper:
+    helperDialect: oracle
+    reasonable: true
+    supportMethodsArguments: true
+    params:
+      count: countSql
+
+
 
 
